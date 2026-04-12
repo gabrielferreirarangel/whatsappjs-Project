@@ -13,6 +13,9 @@ ClienteSchema = new mongoose.Schema({
         index: true
     },
     numeroCorreto: {
-        
+        type: Number,
+        require: true
     }
 })
+
+module.exports = mongoose.model('Cliente', ClienteSchema);

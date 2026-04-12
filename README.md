@@ -1,5 +1,5 @@
 # whatsappjs-Project
 
-#AT Informatica Bot
+# AT Informatica Saas
 
-Por agora quero fazer um sistema de bot usando Whatsapp JS para enviar mensagem automaticas para clientes.
+Basicamente o projeto consiste em usar como principal base o "whatsapp-web.js" um bot que terá para nos o uso de enviar mensagens automatizadas para clientes.
