@@ -1,5 +1,10 @@
-const express = require('express')
+import 'dotenv/config';
+import connectDB from './src/config/db.js'
+import express from 'express'
 const app = express()
+
+
+connectDB()
 
 app.get('/', (req, res) =>{
     res.end('hello word')

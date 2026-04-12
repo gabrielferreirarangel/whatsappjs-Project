@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const { type } = require('node:os');
+import mongoose from 'mongoose'
 
-ClienteSchema = new mongoose.Schema({
+const ClienteSchema = new mongoose.Schema({
     nomeRazaoSocial: {
         type: String,
         require: true,
@@ -18,4 +17,4 @@ ClienteSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Cliente', ClienteSchema);
+export default mongoose.model('Cliente', ClienteSchema);

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const VencimentoSchema = new mongoose.Schema({
     clienteId: {
@@ -15,3 +15,5 @@ const VencimentoSchema = new mongoose.Schema({
         type: Date
     },
 })
+
+export default mongoose.model('Vencimento', VencimentoSchema)
