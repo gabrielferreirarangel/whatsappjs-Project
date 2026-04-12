@@ -1,0 +1,25 @@
+{
+  "name": "whatsappjs-project",
+  "version": "1.0.0",
+  "description": "Por agora quero fazer um sistema de bot usando Whatsapp JS para enviar mensagem automaticas para clientes.",
+  "homepage": "https://github.com/gabrielferreirarangel/whatsappjs-Project#readme",
+  "bugs": {
+    "url": "https://github.com/gabrielferreirarangel/whatsappjs-Project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielferreirarangel/whatsappjs-Project.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "whatsapp-web.js": "^1.34.6",
+    "xlsx": "^0.18.5"
+  }
+}
