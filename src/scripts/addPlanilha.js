@@ -8,7 +8,7 @@ const limparNumero = (valor) => {
 
 const importarClientes = async () => {
   try {
-    const workbook = xlsx.readFile('./src/data/seed/Vencimento de Certificados.xlsx'); 
+    const workbook = xlsx.readFile('./src/data/seed/vencimentoGeral.xlsx');
     //Vencimento de Certificados
 
     const sheetName = workbook.SheetNames[0];
@@ -21,10 +21,31 @@ const importarClientes = async () => {
       cpfCnpj: limparNumero(item["CPF/CNPJ"] || item.cpfCnpj),
       numeroCorreto: limparNumero(item["Número Correto"] || item.numeroCorreto)
     }));
-    await Cliente.deleteMany({});
-    await Cliente.insertMany(clientes, { ordered: false });
 
+    const unico = new Map();
+
+    clientes.forEach(c => {
+      if (c.cpfCnpj) {
+        unico.set(c.cpfCnpj, c);
+      }
+    });
+
+    const clientesUnicos = Array.from(unico.values());
+
+    const cpfs = clientesUnicos.map(c => c.cpfCnpj);
+
+    const existentes = await Cliente.find({
+      cpfCnpj: { $in: cpfs }
+    }).select('cpfCnpj');
+
+    const existentesSet = new Set(existentes.map(c => c.cpfCnpj));
+
+    const novosClientes = clientesUnicos.filter(c => !existentesSet.has(c.cpfCnpj));
+
+    await Cliente.insertMany(novosClientes);
+    
     console.log('Clientes importados');
+    console.table(novosClientes);
     console.table(clientes);
   } catch (err) {
     console.error('Erro ao importar:', err.message);
