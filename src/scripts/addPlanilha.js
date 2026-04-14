@@ -1,35 +1,34 @@
-import 'dotenv/config';
-import connectDB from '../config/db.js';
 import xlsx from 'xlsx';
 import Cliente from '../models/Cliente.js';
 
-const run = async () => {
-  try {
-    await connectDB();
+const limparNumero = (valor) => {
+  if (!valor) return null;
+  return Number(valor.toString().replace(/\D/g, ''));
+};
 
-    const workbook = xlsx.readFile('../data/seed/planilhaPrincipal.xlsx');
+const importarClientes = async () => {
+  try {
+    const workbook = xlsx.readFile('./src/data/seed/Vencimento de Certificados.xlsx'); 
+    //Vencimento de Certificados
 
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
 
     const dados = xlsx.utils.sheet_to_json(sheet);
 
-    console.log(`Total: ${dados.length}`);
-
     const clientes = dados.map(item => ({
-      nomeRazaoSocial: item.nomeRazaoSocial,
-      cpfCnpj: Number(item.cpfCnpj),
-      numeroCorreto: Number(item.numeroCorreto)
+      nomeRazaoSocial: item["Nome Razão Social"] || item.nomeRazaoSocial,
+      cpfCnpj: limparNumero(item["CPF/CNPJ"] || item.cpfCnpj),
+      numeroCorreto: limparNumero(item["Número Correto"] || item.numeroCorreto)
     }));
-
+    await Cliente.deleteMany({});
     await Cliente.insertMany(clientes, { ordered: false });
 
-    console.log('Importação finalizada');
-    process.exit();
+    console.log('Clientes importados');
+    console.table(clientes);
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    console.error('Erro ao importar:', err.message);
   }
 };
 
-run();
+export default importarClientes;
