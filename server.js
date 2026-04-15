@@ -4,7 +4,10 @@ import express from 'express'
 const app = express()
 import importarClientes from './src/scripts/addPlanilha.js';
 import Cliente from './src/models/Cliente.js';
+import clienteRouters from './src/routes/clienteRouters.js';
 
+app.use(express.json());
+app.use('/clientes', clienteRouters);
 
 const startServer = async () => {
   await connectDB();
