@@ -4,10 +4,10 @@ import Vencimento from '../models/vencimento.js';
 
 const limparNumero = (valor) => {
   if (!valor) return null;
-  return Number(valor.toString().replace(/\D/g, ''));
+  return valor.toString().replace(/\D/g, '');
 };
 
-export const processarVencimentos = async () => {
+const processarVencimentos = async () => {
   const workbook = xlsx.readFile('./src/uploads/resumoCertificadosExpirando.xlsx');
 
   const sheetName = workbook.SheetNames[0];
@@ -34,7 +34,7 @@ export const processarVencimentos = async () => {
       clienteId: cliente._id,
       modelo: item["Modelo"],
       indicador: item["Indicador"],
-      dataVenciemento: new Date(item["Data Vencimento"])
+      dataVencimento: new Date(item["Data Vencimento"])
     });
 
     inseridos++;
@@ -46,3 +46,5 @@ export const processarVencimentos = async () => {
     total: dados.length
   };
 };
+
+export default { processarVencimentos};

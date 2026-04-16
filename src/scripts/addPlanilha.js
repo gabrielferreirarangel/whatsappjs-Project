@@ -3,7 +3,7 @@ import Cliente from '../models/cliente.js';
 
 const limparNumero = (valor) => {
   if (!valor) return null;
-  return Number(valor.toString().replace(/\D/g, ''));
+  return valor.toString().replace(/\D/g, '');
 };
 
 const importarClientes = async () => {

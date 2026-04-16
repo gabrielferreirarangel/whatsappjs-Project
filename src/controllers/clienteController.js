@@ -1,6 +1,5 @@
 import Cliente from '../models/cliente.js';
 import importarClientes from '../scripts/addPlanilha.js';
-import { processarVencimentos } from '../services/vencimentoService.js';
 
 const getClientes = async (req, res) => {
   try {
