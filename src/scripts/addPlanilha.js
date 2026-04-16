@@ -1,5 +1,5 @@
 import xlsx from 'xlsx';
-import Cliente from '../models/Cliente.js';
+import Cliente from '../models/cliente.js';
 
 const limparNumero = (valor) => {
   if (!valor) return null;
@@ -43,7 +43,7 @@ const importarClientes = async () => {
     const novosClientes = clientesUnicos.filter(c => !existentesSet.has(c.cpfCnpj));
 
     await Cliente.insertMany(novosClientes);
-    
+
     console.log('Clientes importados');
     console.table(novosClientes);
     console.table(clientes);

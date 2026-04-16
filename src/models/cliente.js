@@ -6,13 +6,13 @@ const ClienteSchema = new mongoose.Schema({
         require: true,
         trim: true
     },cpfCnpj: {
-        type: Number,
+        type: String,
         require: true,
         unique: true,
         index: true
     },
     numeroCorreto: {
-        type: Number,
+        type: String,
         require: true
     }
 })
